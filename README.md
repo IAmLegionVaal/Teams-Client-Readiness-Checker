@@ -1,21 +1,30 @@
 # Teams Client Readiness Checker
 
-A read-only PowerShell toolkit for Microsoft Teams device and connectivity readiness.
+PowerShell tools for Microsoft Teams device and connectivity readiness plus guarded local client repair.
 
-## Features
-
-- Windows version and hardware summary
-- Teams process and installation-path detection
-- Microphone, camera, and audio device inventory
-- Microsoft Teams endpoint reachability checks
-- CSV, JSON, and HTML reports
-
-## Run
+## Check readiness
 
 ```powershell
 powershell.exe -ExecutionPolicy Bypass -File .\Teams_Client_Readiness_Checker.ps1
 ```
 
-## Safety
+## Repair
 
-Read-only reporting only. No Teams or device settings are changed.
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Teams_Client_Readiness_Repair_Toolkit.ps1 -ClearTeamsCache -DryRun
+```
+
+Examples:
+
+```powershell
+.\Teams_Client_Readiness_Repair_Toolkit.ps1 -ClearTeamsCache -RestartTeams
+.\Teams_Client_Readiness_Repair_Toolkit.ps1 -ResetTeamsPackage
+.\Teams_Client_Readiness_Repair_Toolkit.ps1 -RestartAudioServices
+.\Teams_Client_Readiness_Repair_Toolkit.ps1 -FlushDns
+```
+
+The repair workflow captures Teams, package, audio, camera and endpoint state before and after changes. It supports `-DryRun`, confirmation, logs and clear exit codes. Cache or package reset may require the user to sign in again.
+
+## Author
+
+Dewald Pretorius — L2 IT Support Engineer
